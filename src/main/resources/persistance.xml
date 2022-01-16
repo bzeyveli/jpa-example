@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence"
+             version="2.1">
+
+    <persistence-unit name="my-persistence" transaction-type="RESOURCE_LOCAL">
+
+                <!-- Entity class'ları belirledik -->
+                <class> com.example.jpa.model.Book</class>
+
+                <!--veritabanı bilgileri bu alanda tanımlanır -->
+
+        <properties>
+                <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+                <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/jpa"/>
+                <property name="javax.persistence.jdbc.user" value="root"/>
+                <property name="javax.persistence.jdbc.password" value="12345"/>
+
+            <!-- veritabanı bilgileri hibernate kullanacagımız belirtik-->
+
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
+
+            <!-- veritabanı ile alışverişin thread yöntemi ile olacağının belirttik -->
+            <property name="current_session_context_class" value="thread"/>
+
+            <!-- arka tarafta çalışan sql komutlarının console de görünmesini saglar. -->
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+
+            <!-- Connection provider -->
+            <property name="hibernate.connection.provider_class" value="org.hibernate.connection.C3P0ConnectionProvider"/>
+            <!-- veritabanına baglanacak min baglantı sayısı   -->
+            <property name="hibernate.c3p0.min_size" value="1"/>
+            <!--  veritabanına baglanacak max baglantı sayısı    -->
+            <property name="hibernate.c3p0.max_size" value="20"/>
+            <!-- baglantı sayısı 20'yi gecerse yeni baglantı  artırma özelliği -->
+            <property name="hibernate.c3p0.acquire_increment" value="20"/>
+            <!-- Ön belleğe alınma... aşagıda önbellekte max 30 tane tutmasını söyledik-->
+            <property name="hibernate.c3p0.max_statements" value="30"/>
+            <!-- Kullanılmayan bağlantıları yok etme -->
+            <property name="hibernate.c3p0.timeout" value="600"/>
+            <!-- Baglantıların kullanılabilir veya kullanılamaz olduğunu test etme (1sn de bir kontrol ediyor)-->
+            <property name="hibernate.c3p0.idle_test_period" value="1000"/>
+            <!-- Connection provider bitiş-->
+
+        </properties>
+    </persistence-unit>
+
+</persistence>
+
